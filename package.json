@@ -1,0 +1,8 @@
+{
+  "name": "name",
+  "version": "version",
+  "description": "Make Block Chain with Typescript",
+  "main": "index.js",
+  "author": "iylinkim <kiylin94@naver.com>",
+  "license": "MIT"
+}
