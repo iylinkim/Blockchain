@@ -1,15 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Human {
-    constructor(name, age, gender) {
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
+class Block {
+    constructor(index, hash, previousHash, data, timestamp) {
+        this.index = index;
+        this.hash = hash;
+        this.previousHash = previousHash;
+        this.data = data;
+        this.timestamp = timestamp;
     }
 }
-const me = new Human("Iylin", 18, "female");
-const sayHi = (person) => {
-    return `Hello ${person.name}, you are ${person.age}, you are a ${person.gender}`;
-};
-console.log(sayHi(me));
+const genesisBlock = new Block(0, "202020", "", "hello", 123456);
+let blockchain = [genesisBlock];
+// Block만 blockchain에 추가하도록 체크함
+// blockchain.push("stuff") Block이 아니기 때문에 추가할 수 없음
+console.log(blockchain);
 //# sourceMappingURL=index.js.map
