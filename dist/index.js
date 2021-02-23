@@ -12,6 +12,11 @@ class Block {
 }
 //static으로 method를 생성한다면, new Block을 생성하지 않아도 사용할 수 있음
 Block.calculateBlockHash = (index, previousHash, timestamp, data) => CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
+Block.validateStructure = (aBlock) => typeof aBlock.index === "number" &&
+    typeof aBlock.hash === "string" &&
+    typeof aBlock.previousHash === "string" &&
+    typeof aBlock.timestamp === "number" &&
+    typeof aBlock.data === "string";
 const genesisBlock = new Block(0, "202020", "", "hello", 123456);
 let blockchain = [genesisBlock];
 // Block만 blockchain에 추가하도록 체크함
@@ -27,5 +32,16 @@ const createNewBlock = (data) => {
     const newBlock = new Block(newIndex, newHash, previousBlock.hash, data, newTimeStamp);
     return newBlock;
 };
-console.log(createNewBlock("hello"), createNewBlock("bye bye"));
+const isBlockValid = (candidateBlock, previousBlock) => {
+    if (!Block.validateStructure(candidateBlock)) {
+        // 블록의 구조가 유효한지 체크
+        return false;
+    }
+    else if (previousBlock.index + 1 !== candidateBlock.index) {
+        return false;
+    }
+    else if (previousBlock.hash !== candidateBlock.previousHash) {
+        return false;
+    }
+};
 //# sourceMappingURL=index.js.map
