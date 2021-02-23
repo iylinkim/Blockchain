@@ -30,6 +30,7 @@ const createNewBlock = (data) => {
     const newTimeStamp = getNewTimeStamp();
     const newHash = Block.calculateBlockHash(newIndex, previousBlock.hash, newTimeStamp, data);
     const newBlock = new Block(newIndex, newHash, previousBlock.hash, data, newTimeStamp);
+    addBlock(newBlock);
     return newBlock;
 };
 const getHashforBlock = (aBlock) => Block.calculateBlockHash(aBlock.index, aBlock.previousHash, aBlock.timestamp, aBlock.data);
@@ -38,7 +39,8 @@ const isBlockValid = (candidateBlock, previousBlock) => {
         // 블록의 구조가 유효한지 체크
         return false;
     }
-    else if (previousBlock.index + 1 !== candidateBlock.index) { //이전블록과 현재블록을 비교
+    else if (previousBlock.index + 1 !== candidateBlock.index) {
+        //이전블록과 현재블록을 비교
         return false;
     }
     else if (previousBlock.hash !== candidateBlock.previousHash) {
@@ -56,4 +58,8 @@ const addBlock = (candidateBlock) => {
         blockchain.push(candidateBlock);
     }
 };
+createNewBlock("second block");
+createNewBlock("third block");
+createNewBlock("fourth block");
+console.log(blockchain);
 //# sourceMappingURL=index.js.map
